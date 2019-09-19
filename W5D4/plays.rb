@@ -50,10 +50,20 @@ class Play
   end
 
   def self.find_by_title(title)
-
+    PlayDBConnection.instance.execute(<<-SQL)
+      SELECT
+        *
+      FROM
+        plays
+      WHERE
+        plays.title = title 
+    SQL
   end
 
   def self.find_by_playwright(name)
-    
+
   end
 end
+
+# p Play.all
+p Play.find_by_title("All My Sons")
